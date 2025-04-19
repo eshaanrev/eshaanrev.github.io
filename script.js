@@ -1,45 +1,91 @@
-document.getElementById('resumeForm').addEventListener('submit', function(e) {
-  e.preventDefault();
+// Particles background
+window.onload = function() {
+  Particles.init({
+    selector: '#particles-canvas',
+    color: ['#7f5af0', '#ff8906', '#fffffe'],
+    connectParticles: true,
+    responsive: [
+      {
+        breakpoint: 768,
+        options: {
+          maxParticles: 80,
+          connectParticles: false
+        }
+      }
+    ]
+  });
+};
 
-  const name = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const phone = document.getElementById('phone').value.trim();
-  const summary = document.getElementById('summary').value.trim();
-  const skills = document.getElementById('skills').value.split(',').map(s => s.trim()).filter(s => s);
-  const education = document.getElementById('education').value.trim();
-  const experience = document.getElementById('experience').value.trim();
-  const awards = document.getElementById('awards').value.trim();
-
-  const output = document.getElementById('resumeOutput');
-  output.classList.remove('hidden');
-  output.innerHTML = `
-    <h2>${name}</h2>
-    <p><strong>Email:</strong> ${email} | <strong>Phone:</strong> ${phone}</p>
-    <h2>Summary</h2>
-    <p>${summary}</p>
-    <h2>Skills</h2>
-    <ul>${skills.map(skill => `<li>${skill}</li>`).join('')}</ul>
-    <h2>Education</h2>
-    <p>${education}</p>
-    <h2>Experience</h2>
-    <p>${experience}</p>
-    <h2>Awards</h2>
-    <p>${awards}</p>
-  `;
-
-  // 🔧 Suggestions logic – now inside the form handler
-  const suggestions = [];
-  if (skills.length < 4) suggestions.push("Add more skills to better showcase your abilities.");
-  if (!education.includes(",")) suggestions.push("Consider adding more educational details.");
-  if (!experience.includes(",")) suggestions.push("Consider internships/courses for more experience.");
-  if (!awards.includes(",")) suggestions.push("Consider participating in more competitions with dedication towards the top spots.");
-
-  if (suggestions.length > 0) {
-    output.innerHTML += `
-      <h2>Suggestions for Improvement</h2>
-      <ul style="color: #d9534f;">
-        ${suggestions.map(s => `<li>${s}</li>`).join('')}
-      </ul>
-    `;
+// Glow effect following cursor
+document.addEventListener('mousemove', function(e) {
+  // Create or get glow element
+  let glow = document.querySelector('.glow');
+  if (!glow) {
+    glow = document.createElement('div');
+    glow.classList.add('glow');
+    document.body.appendChild(glow);
   }
+  
+  // Position glow at cursor
+  glow.style.left = (e.pageX - 100) + 'px';
+  glow.style.top = (e.pageY - 100) + 'px';
+});
+
+// Smooth scroll for navigation
+document.querySelectorAll('nav a').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    const targetId = this.getAttribute('href');
+    const targetElement = document.querySelector(targetId);
+    
+    window.scrollTo({
+      top: targetElement.offsetTop - 80,
+      behavior: 'smooth'
+    });
+  });
+});
+
+themeToggle.addEventListener('click', () => {
+  if (isDarkMode) {
+    // Switch to light mode
+    document.documentElement.style.setProperty('--background', '#fffffe');
+    document.documentElement.style.setProperty('--secondary', '#f2f4f6');
+    document.documentElement.style.setProperty('--text', '#0f0e17');
+    document.documentElement.style.setProperty('--paragraph', '#2e2f3e');
+    document.documentElement.style.setProperty('--card-bg', 'rgba(242, 244, 246, 0.7)');
+    themeIcon.classList.remove('fa-moon');
+    themeIcon.classList.add('fa-sun');
+  } else {
+    // Switch to dark mode
+    document.documentElement.style.setProperty('--background', '#0f0e17');
+    document.documentElement.style.setProperty('--secondary', '#121212');
+    document.documentElement.style.setProperty('--text', '#fffffe');
+    document.documentElement.style.setProperty('--paragraph', '#a7a9be');
+    document.documentElement.style.setProperty('--card-bg', 'rgba(32, 32, 42, 0.7)');
+    themeIcon.classList.remove('fa-sun');
+    themeIcon.classList.add('fa-moon');
+  }
+  
+  isDarkMode = !isDarkMode;
+});
+
+// Reveal animations for sections
+const observerOptions = {
+  threshold: 0.1 
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = 1;
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('section').forEach(section => {
+  section.style.opacity = 0;
+  section.style.transform = 'translateY(20px)';
+  observer.observe(section);
 });
