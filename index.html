@@ -131,6 +131,7 @@
       border: 1px solid rgba(255, 255, 255, 0.05);
       height: 100%;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
     }
     
     .card:hover {
@@ -154,6 +155,7 @@
       flex-wrap: wrap;
       gap: 1rem;
       margin-top: 2rem;
+      margin-bottom: 2rem;
     }
     
     .skill-tag {
@@ -283,6 +285,54 @@
       font-size: 1.2rem;
       border-bottom: 1px solid rgba(127, 90, 240, 0.2);
       padding-bottom: 0.5rem;
+    }        
+    
+    /* Fixed project links styling */
+    .project-links {
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: flex-start;
+      gap: 1rem;
+    }
+    
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: var(--accent);
+      color: var(--text);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+    
+    .project-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(127, 90, 240, 0.3);
+      background-color: #8d6df7;
+    }
+    
+    .coming-soon {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: rgba(127, 90, 240, 0.3);
+      color: var(--text);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .coming-soon:before {
+      content: '\f017';
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
     }
     
     @media (max-width: 768px) {
@@ -301,67 +351,6 @@
       .tech-icons-grid {
         grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
       }
-  
-.project-links {
-  display: flex;
-  margin-top: 1.5rem;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.project-link {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.5rem 1rem;
-  background-color: var(--secondary);
-  color: var(--text);
-  border-radius: 8px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.project-link:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  background-color: #5223de;
-  color: #fffffe;
-}
-
-.project-link i {
-  margin-right: 8px;
-}
-
-
-.video-container {
-  position: relative;
-  padding-bottom: 56.3%; 
-  height: 0;
-  overflow: hidden;
-  margin-top: 1.5rem;
-  border-radius: 8px;
-}
-
-.video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 8px;
-}
-
-.project-link.disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-  background-color: var(--secondary);
-  color: var(--text);
-}
-
-.project-link.disabled:hover {
-  transform: none;
-  box-shadow: none;
-  background-color: var(--secondary);
-}
     }
 
   </style>
@@ -408,12 +397,10 @@
               <span class="skill-tag"><i class=""></i> n/a</span>
               <span class="skill-tag"><i class=""></i> n/a</span>
               <span class="skill-tag"><i class=""></i> n/a</span>
-              <div class="project-links">
-                <span class="project-link disabled">
-                  <i class="fas fa-hourglass-half"></i> Demo Coming Soon
-                </span>
-              </div>
             </div>
+            <div class="project-links">
+              <span class="coming-soon">Demo coming soon</span>
+            </div>            
           </div>
         </div>
         
@@ -425,12 +412,13 @@
               <span class="skill-tag"><i class="fab fa-html5"></i> HTML</span>
               <span class="skill-tag"><i class="fab fa-css3"></i> CSS</span>
               <span class="skill-tag"><i class="fab fa-js"></i> JavaScript</span>
-              <div class="project-links">
-                <a href="https://0825eshaan.github.io/reactify" target="_blank" class="project-link">
-                  <i class="fab fa-github"></i> View on GitHub
-                </a>
-              </div>
             </div>
+            <div class="project-links">
+              <a href="https://reactify-demo-link.com" target="_blank" class="project-link">
+                <i class="fas fa-external-link-alt"></i> Live Demo
+              </a>
+            </div>
+            
           </div>
         </div>
         
@@ -443,12 +431,10 @@
               <span class="skill-tag"><i class="fab fa-js"></i> JavaScript</span>
               <span class="skill-tag"><i class="fas fa-wind"></i> Tailwind</span>
               <span class="skill-tag"><i class="fab fa-react"></i> React</span>
-              <div class="project-links">
-                <span class="project-link disabled">
-                  <i class="fas fa-hourglass-half"></i> Demo Coming Soon
-                </span>
-              </div>
             </div>
+            <div class="project-links">
+              <span class="coming-soon">Demo coming soon</span>
+            </div>       
           </div>
         </div>
       </div>
@@ -467,6 +453,11 @@
               <span class="skill-tag"><i class="fas fa-microchip"></i> Arduino</span>
               <span class="skill-tag"><i class="fas fa-c"></i> C++</span>
             </div>
+            <div class="project-links">
+              <a href="https://www.youtube.com/watch?v=4vD-6Ere7GE" target="_blank" class="project-link">
+                <i class="fab fa-youtube"></i> Watch Video
+              </a>
+            </div>            
           </div>
         </div>
         
@@ -480,6 +471,9 @@
                 <span class="skill-tag"><i class="fas fa-microchip"></i> Arduino</span>
                 <span class="skill-tag"><i class="fas fa-c"></i> C++</span>
             </div>
+            <div class="project-links">
+              <span class="coming-soon">Demo coming soon</span>
+            </div>            
           </div>
         </div>
       </div>
