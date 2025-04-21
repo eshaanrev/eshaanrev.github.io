@@ -277,7 +277,6 @@ footer {
   padding-bottom: 0.5rem;
 }        
 
-/* Project links styling */
 .project-links {
   margin-top: 1.5rem;
   display: flex;
@@ -341,4 +340,8 @@ footer {
   .tech-icons-grid {
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   }
+}
+
+html {
+  scroll-behavior: smooth;
 }
