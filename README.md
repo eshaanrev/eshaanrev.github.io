@@ -1,2 +1,2 @@
 # 0825eshaan.github.io
-personal website repository
+This is the repository for my personal website, containing my projects and information.
