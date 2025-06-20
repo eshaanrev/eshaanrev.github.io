@@ -1,11 +1,11 @@
 :root {
-  --background: #0f0e17;
-  --secondary: #121212;
-  --accent: #7f5af0;
-  --text: #fffffe;
-  --paragraph: #a7a9be;
-  --highlight: #ff8906;
-  --card-bg: rgba(32, 32, 42, 0.7);
+  --background: #0a0a0f;
+  --secondary: #151520;
+  --accent: #2d3748;
+  --text: #e2e8f0;
+  --paragraph: #94a3b8;
+  --highlight: #475569;
+  --card-bg: rgba(20, 25, 35, 0.8);
 }
 
 * {
@@ -116,9 +116,9 @@ section {
   background-color: var(--card-bg);
   border-radius: 8px;
   padding: 1.5rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   height: 100%;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
@@ -126,7 +126,7 @@ section {
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(127, 90, 240, 0.2);
+  box-shadow: 0 10px 30px rgba(45, 55, 72, 0.3);
 }
 
 .card-title {
@@ -149,7 +149,7 @@ section {
 }
 
 .skill-tag {
-  background-color: rgba(127, 90, 240, 0.2);
+  background-color: rgba(45, 55, 72, 0.3);
   color: var(--accent);
   padding: 0.5rem 1rem;
   border-radius: 20px;
@@ -157,7 +157,7 @@ section {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  border: 1px solid rgba(127, 90, 240, 0.3);
+  border: 1px solid rgba(45, 55, 72, 0.4);
 }
 
 .skill-tag i {
@@ -165,7 +165,7 @@ section {
 }
 
 .skill-tag:hover {
-  background-color: rgba(127, 90, 240, 0.3);
+  background-color: rgba(45, 55, 72, 0.5);
   transform: translateY(-2px);
 }
 
@@ -186,7 +186,7 @@ section {
   padding: 0.7rem 1.5rem;
   border-radius: 30px;
   background-color: var(--card-bg);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .contact-link:hover {
@@ -204,7 +204,7 @@ footer {
   color: var(--paragraph);
   font-size: 0.9rem;
   margin-top: 3rem;
-  background-color: rgba(15, 14, 23, 0.7);
+  background-color: rgba(10, 10, 15, 0.8);
   backdrop-filter: blur(5px);
 }
 
@@ -213,7 +213,7 @@ footer {
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(127, 90, 240, 0.2) 0%, rgba(15, 14, 23, 0) 70%);
+  background: radial-gradient(circle, rgba(45, 55, 72, 0.2) 0%, rgba(10, 10, 15, 0) 70%);
   pointer-events: none;
   z-index: -1;
 }
@@ -226,17 +226,17 @@ footer {
 }
 
 .tech-icon-card {
-  background-color: rgba(127, 90, 240, 0.1);
+  background-color: rgba(45, 55, 72, 0.2);
   border-radius: 8px;
   padding: 1rem;
   text-align: center;
-  border: 1px solid rgba(127, 90, 240, 0.2);
+  border: 1px solid rgba(45, 55, 72, 0.3);
   transition: all 0.3s ease;
 }
 
 .tech-icon-card:hover {
   transform: translateY(-5px);
-  background-color: rgba(127, 90, 240, 0.2);
+  background-color: rgba(45, 55, 72, 0.4);
 }
 
 .tech-icon-card i {
@@ -266,14 +266,14 @@ footer {
   cursor: pointer;
   z-index: 100;
   color: var(--text);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .category-title {
   color: var(--accent);
   margin: 1.5rem 0 1rem;
   font-size: 1.2rem;
-  border-bottom: 1px solid rgba(127, 90, 240, 0.2);
+  border-bottom: 1px solid rgba(45, 55, 72, 0.3);
   padding-bottom: 0.5rem;
 }        
 
@@ -296,26 +296,26 @@ footer {
   font-size: 0.9rem;
   font-weight: 500;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .project-link:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(127, 90, 240, 0.3);
-  background-color: #8d6df7;
+  box-shadow: 0 6px 12px rgba(45, 55, 72, 0.4);
+  background-color: var(--highlight);
 }
 
 .coming-soon {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background-color: rgba(127, 90, 240, 0.3);
+  background-color: rgba(45, 55, 72, 0.4);
   color: var(--text);
   padding: 0.5rem 1rem;
   border-radius: 6px;
   font-size: 0.9rem;
   font-weight: 500;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .coming-soon:before {
@@ -377,12 +377,12 @@ section:hover .section-title {
   opacity: 1;
   transform: translateX(0) scale(1.05);
   color: var(--accent);
-  text-shadow: 0 0 20px rgba(127, 90, 240, 0.3);
+  text-shadow: 0 0 20px rgba(45, 55, 72, 0.4);
 }
 
 section:hover .section-title::after {
   width: 100%;
-  box-shadow: 0 0 10px rgba(127, 90, 240, 0.5);
+  box-shadow: 0 0 10px rgba(45, 55, 72, 0.6);
 }
 
 section::before {
@@ -392,7 +392,7 @@ section::before {
   left: -50px;
   right: -50px;
   bottom: 0;
-  background: radial-gradient(ellipse at center, rgba(127, 90, 240, 0.05) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(45, 55, 72, 0.08) 0%, transparent 70%);
   opacity: 0;
   transition: opacity 0.5s ease;
   pointer-events: none;
