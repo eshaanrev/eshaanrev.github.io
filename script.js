@@ -1,108 +1,3 @@
-// Simplified particle system for modern look
-function initParticles() {
-  const canvas = document.getElementById('particles-canvas');
-  const ctx = canvas.getContext('2d');
-  
-  let particles = [];
-  const particleCount = 50;
-  
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  
-  function createParticle() {
-    return {
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.5,
-      vy: (Math.random() - 0.5) * 0.5,
-      size: Math.random() * 2 + 1,
-      opacity: Math.random() * 0.5 + 0.1
-    };
-  }
-  
-  function initializeParticles() {
-    particles = [];
-    for (let i = 0; i < particleCount; i++) {
-      particles.push(createParticle());
-    }
-  }
-  
-  function updateParticles() {
-    particles.forEach(particle => {
-      particle.x += particle.vx;
-      particle.y += particle.vy;
-      
-      // Wrap around edges
-      if (particle.x < 0) particle.x = canvas.width;
-      if (particle.x > canvas.width) particle.x = 0;
-      if (particle.y < 0) particle.y = canvas.height;
-      if (particle.y > canvas.height) particle.y = 0;
-    });
-  }
-  
-  function drawParticles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    particles.forEach(particle => {
-      ctx.beginPath();
-      ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity})`;
-      ctx.fill();
-    });
-    
-    // Draw connections between nearby particles
-    particles.forEach((particle, i) => {
-      particles.slice(i + 1).forEach(otherParticle => {
-        const dx = particle.x - otherParticle.x;
-        const dy = particle.y - otherParticle.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        
-        if (distance < 100) {
-          ctx.beginPath();
-          ctx.moveTo(particle.x, particle.y);
-          ctx.lineTo(otherParticle.x, otherParticle.y);
-          ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 * (1 - distance / 100)})`;
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
-      });
-    });
-  }
-  
-  function animate() {
-    updateParticles();
-    drawParticles();
-    requestAnimationFrame(animate);
-  }
-  
-  resizeCanvas();
-  initializeParticles();
-  animate();
-  
-  window.addEventListener('resize', () => {
-    resizeCanvas();
-    initializeParticles();
-  });
-}
-
-// Smooth scroll for navigation links
-function initSmoothScroll() {
-  document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    });
-  });
-}
-
 // Intersection Observer for scroll animations
 function initScrollAnimations() {
   const observerOptions = {
@@ -113,15 +8,46 @@ function initScrollAnimations() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
+        entry.target.classList.add('in-view');
       }
     });
   }, observerOptions);
   
-  // Observe cards and sections
-  document.querySelectorAll('.card, section').forEach(el => {
-    observer.observe(el);
+  // Observe sections for scroll animations
+  document.querySelectorAll('.section').forEach(section => {
+    observer.observe(section);
+  });
+}
+
+// Smooth scroll for navigation links
+function initSmoothScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        const navHeight = document.querySelector('.main-nav').offsetHeight;
+        const targetPosition = target.offsetTop - navHeight - 20;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+}
+
+// Navigation background on scroll
+function initNavScroll() {
+  const nav = document.querySelector('.main-nav');
+  
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      nav.style.background = 'rgba(10, 10, 10, 0.95)';
+    } else {
+      nav.style.background = 'rgba(10, 10, 10, 0.8)';
+    }
   });
 }
 
@@ -131,27 +57,170 @@ function initThemeToggle() {
   
   themeToggle.addEventListener('click', () => {
     // Future: implement light/dark theme toggle
-    console.log('Theme toggle clicked - feature coming soon');
+    themeToggle.style.transform = 'rotate(180deg)';
+    setTimeout(() => {
+      themeToggle.style.transform = 'rotate(0deg)';
+    }, 300);
+  });
+}
+
+// Stagger animations for cards
+function initStaggerAnimations() {
+  const cards = document.querySelectorAll('.project-card');
+  cards.forEach((card, index) => {
+    card.style.animationDelay = `${index * 0.1}s`;
+  });
+  
+  const skillItems = document.querySelectorAll('.skill-item');
+  skillItems.forEach((item, index) => {
+    item.style.transitionDelay = `${index * 0.05}s`;
+  });
+}
+
+// Parallax effect for floating cards
+function initParallax() {
+  const floatingCards = document.querySelectorAll('.floating-card');
+  
+  window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const rate = scrolled * -0.5;
+    
+    floatingCards.forEach((card, index) => {
+      const speed = 0.5 + (index * 0.2);
+      card.style.transform = `translateY(${rate * speed}px)`;
+    });
+  });
+}
+
+// Typing animation for hero title
+function initTypingAnimation() {
+  const titleLines = document.querySelectorAll('.title-line');
+  
+  titleLines.forEach((line, index) => {
+    line.style.opacity = '0';
+    line.style.transform = 'translateY(20px)';
+    
+    setTimeout(() => {
+      line.style.transition = 'all 0.6s ease-out';
+      line.style.opacity = '1';
+      line.style.transform = 'translateY(0)';
+    }, index * 300);
+  });
+}
+
+// Mouse movement effect for hero visual
+function initMouseEffect() {
+  const heroVisual = document.querySelector('.hero-visual');
+  const floatingCards = document.querySelectorAll('.floating-card');
+  
+  if (heroVisual) {
+    heroVisual.addEventListener('mousemove', (e) => {
+      const rect = heroVisual.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top) / rect.height;
+      
+      floatingCards.forEach((card, index) => {
+        const intensity = 10 + (index * 5);
+        const moveX = (x - 0.5) * intensity;
+        const moveY = (y - 0.5) * intensity;
+        
+        card.style.transform = `translate(${moveX}px, ${moveY}px)`;
+      });
+    });
+    
+    heroVisual.addEventListener('mouseleave', () => {
+      floatingCards.forEach(card => {
+        card.style.transform = 'translate(0, 0)';
+      });
+    });
+  }
+}
+
+// Project card hover effects
+function initProjectCardEffects() {
+  const projectCards = document.querySelectorAll('.project-card');
+  
+  projectCards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      const techTags = card.querySelectorAll('.tech-tag');
+      techTags.forEach((tag, index) => {
+        setTimeout(() => {
+          tag.style.transform = 'translateY(-2px)';
+        }, index * 50);
+      });
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      const techTags = card.querySelectorAll('.tech-tag');
+      techTags.forEach(tag => {
+        tag.style.transform = 'translateY(0)';
+      });
+    });
+  });
+}
+
+// Skill item hover wave effect
+function initSkillWaveEffect() {
+  const skillCategories = document.querySelectorAll('.skill-category');
+  
+  skillCategories.forEach(category => {
+    const skillItems = category.querySelectorAll('.skill-item');
+    
+    category.addEventListener('mouseenter', () => {
+      skillItems.forEach((item, index) => {
+        setTimeout(() => {
+          item.style.transform = 'translateX(5px)';
+        }, index * 50);
+      });
+    });
+    
+    category.addEventListener('mouseleave', () => {
+      skillItems.forEach(item => {
+        item.style.transform = 'translateX(0)';
+      });
+    });
   });
 }
 
 // Initialize all functionality when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-  initParticles();
-  initSmoothScroll();
   initScrollAnimations();
+  initSmoothScroll();
+  initNavScroll();
   initThemeToggle();
+  initStaggerAnimations();
+  initTypingAnimation();
+  initMouseEffect();
+  initProjectCardEffects();
+  initSkillWaveEffect();
+  
+  // Only add parallax on larger screens to avoid performance issues
+  if (window.innerWidth > 768) {
+    initParallax();
+  }
 });
 
-// Add stagger animation delays to cards
-document.addEventListener('DOMContentLoaded', () => {
-  const cards = document.querySelectorAll('.card');
-  cards.forEach((card, index) => {
-    card.style.animationDelay = `${index * 0.1}s`;
-  });
-  
-  const skillTags = document.querySelectorAll('.skill-tag');
-  skillTags.forEach((tag, index) => {
-    tag.style.animationDelay = `${index * 0.05}s`;
-  });
+// Handle resize events
+window.addEventListener('resize', () => {
+  // Reinitialize parallax based on screen size
+  if (window.innerWidth <= 768) {
+    window.removeEventListener('scroll', initParallax);
+  }
 });
+
+// Performance optimization: Throttle scroll events
+function throttle(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+// Apply throttling to scroll-heavy functions
+const throttledParallax = throttle(initParallax, 16); // ~60fps
+window.addEventListener('scroll', throttledParallax);
