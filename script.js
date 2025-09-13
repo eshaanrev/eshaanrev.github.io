@@ -68,12 +68,12 @@ function initThemeToggle() {
 function initStaggerAnimations() {
   const cards = document.querySelectorAll('.project-card');
   cards.forEach((card, index) => {
-    card.style.animationDelay = `${index * 0.1}s`;
+    card.style.transitionDelay = `${index * 0.1}s`;
   });
   
   const skillItems = document.querySelectorAll('.skill-item');
   skillItems.forEach((item, index) => {
-    item.style.transitionDelay = `${index * 0.05}s`;
+    item.style.transitionDelay = `${index * 0.03}s`;
   });
 }
 
@@ -97,14 +97,8 @@ function initTypingAnimation() {
   const titleLines = document.querySelectorAll('.title-line');
   
   titleLines.forEach((line, index) => {
-    line.style.opacity = '0';
-    line.style.transform = 'translateY(20px)';
-    
-    setTimeout(() => {
-      line.style.transition = 'all 0.6s ease-out';
-      line.style.opacity = '1';
-      line.style.transform = 'translateY(0)';
-    }, index * 300);
+    // Animation is now handled by CSS
+    line.style.animationDelay = `${index * 0.3}s`;
   });
 }
 
@@ -145,15 +139,15 @@ function initProjectCardEffects() {
       const techTags = card.querySelectorAll('.tech-tag');
       techTags.forEach((tag, index) => {
         setTimeout(() => {
-          tag.style.transform = 'translateY(-2px)';
-        }, index * 50);
+          tag.style.transform = 'translateY(-2px) scale(1.05)';
+        }, index * 30);
       });
     });
     
     card.addEventListener('mouseleave', () => {
       const techTags = card.querySelectorAll('.tech-tag');
       techTags.forEach(tag => {
-        tag.style.transform = 'translateY(0)';
+        tag.style.transform = 'translateY(0) scale(1)';
       });
     });
   });
@@ -169,14 +163,14 @@ function initSkillWaveEffect() {
     category.addEventListener('mouseenter', () => {
       skillItems.forEach((item, index) => {
         setTimeout(() => {
-          item.style.transform = 'translateX(5px)';
-        }, index * 50);
+          item.style.transform = 'translateX(8px) scale(1.02)';
+        }, index * 30);
       });
     });
     
     category.addEventListener('mouseleave', () => {
       skillItems.forEach(item => {
-        item.style.transform = 'translateX(0)';
+        item.style.transform = 'translateX(0) scale(1)';
       });
     });
   });
