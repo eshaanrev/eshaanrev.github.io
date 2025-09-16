@@ -828,6 +828,29 @@ body {
   left: 100%;
 }
 
+.skill-category::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-primary);
+  transform: scaleX(0);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: left;
+}
+
+.skill-category:hover::after {
+  transform: scaleX(1);
+}
+
+.skill-category:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(59, 130, 246, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
 .skill-category h3 {
   font-size: 1.25rem;
   font-weight: 600;
