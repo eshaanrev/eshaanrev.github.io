@@ -153,29 +153,6 @@ function initProjectCardEffects() {
   });
 }
 
-// Skill item hover wave effect
-function initSkillWaveEffect() {
-  const skillCategories = document.querySelectorAll('.skill-category');
-  
-  skillCategories.forEach(category => {
-    const skillItems = category.querySelectorAll('.skill-item');
-    
-    category.addEventListener('mouseenter', () => {
-      skillItems.forEach((item, index) => {
-        setTimeout(() => {
-          item.style.transform = 'translateX(8px) scale(1.02)';
-        }, index * 30);
-      });
-    });
-    
-    category.addEventListener('mouseleave', () => {
-      skillItems.forEach(item => {
-        item.style.transform = 'translateX(0) scale(1)';
-      });
-    });
-  });
-}
-
 // Initialize all functionality when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
   initScrollAnimations();
@@ -186,7 +163,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initTypingAnimation();
   initMouseEffect();
   initProjectCardEffects();
-  initSkillWaveEffect();
   
   // Only add parallax on larger screens to avoid performance issues
   if (window.innerWidth > 768) {
